@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/00-BuildingBlocks/">
+    <Project Path="ZorgcentrumSln.Buildingblocks/ZorgcentrumSln.Buildingblocks.csproj" />
+  </Folder>
+  <Folder Name="/03-BL/">
+    <Project Path="ZorgcentrumSln.BL.xUnitTestProject/ZorgcentrumSln.BL.xUnitTestProject.csproj" />
+    <Project Path="ZorgcentrumSln.BL/ZorgcentrumSln.BL.csproj" />
+  </Folder>
+</Solution>
