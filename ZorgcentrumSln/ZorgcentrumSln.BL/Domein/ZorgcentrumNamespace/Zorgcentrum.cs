@@ -2,11 +2,7 @@
 
 namespace ZorgcentrumSln.BL.Domein.ZorgcentrumNamespace; 
 public class Zorgcentrum {
-	private HashSet<Afdeling> _afdelingen;
+	private readonly HashSet<Afdeling> _afdelingen;
 
-	public HashSet<Afdeling> Afdelingen {
-		get { return _afdelingen; }
-		set { _afdelingen = value; }
-	}
-
+	public IReadOnlyCollection<Afdeling> Afdelingen => _afdelingen.AsReadOnly();
 }

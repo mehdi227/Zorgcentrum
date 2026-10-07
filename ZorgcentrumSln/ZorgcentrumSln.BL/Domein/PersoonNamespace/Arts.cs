@@ -1,8 +1,14 @@
-﻿using ZorgcentrumSln.Buildingblocks.ValueObjects;
+﻿using ZorgcentrumSln.BL.Domein.AfdelingNamespace;
+using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.BL.Domein.PersoonNamespace; 
-public class Arts {
-	private string _specialisatie;
+public class Arts : Persoon {
+    public Arts(RijksRegisterNr rrn, string naam, string voornaam, string specialisatie, RizivNr rizivNr) 
+		: base(rrn, naam, voornaam) {
+
+    }
+
+    private string _specialisatie;
 
 	public string Specialisatie {
 		get { return _specialisatie; }
@@ -11,7 +17,7 @@ public class Arts {
 
 	private RizivNr _rizivNr;
 
-	public RizivNr RizivNr {
+    public RizivNr RizivNr {
 		get { return _rizivNr; }
 		set { _rizivNr = value; }
 	}

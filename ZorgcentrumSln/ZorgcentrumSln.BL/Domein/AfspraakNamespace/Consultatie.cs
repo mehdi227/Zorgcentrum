@@ -1,4 +1,4 @@
 ﻿namespace ZorgcentrumSln.BL.Domein.AfspraakNamespace {
-    public class Consultatie {
+    public class Consultatie : Afspraak {
     }
 }

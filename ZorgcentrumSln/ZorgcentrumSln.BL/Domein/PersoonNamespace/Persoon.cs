@@ -3,7 +3,13 @@ using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.BL.Domein.PersoonNamespace; 
 public abstract class Persoon {
-	private RijksRegisterNr _rrn;
+    protected Persoon(RijksRegisterNr rrn, string naam, string voornaam) {
+        Rrn = rrn;
+        Naam = naam;
+        Voornaam = voornaam;
+    }
+
+    private RijksRegisterNr _rrn;
 
 	public RijksRegisterNr Rrn {
 		get { return _rrn; }
@@ -24,11 +30,7 @@ public abstract class Persoon {
 		set { _voornaam = value; }
 	}
 
-	private HashSet<Afdeling> _afdelingen;
+	private readonly HashSet<Afdeling> _afdelingen;
 
-	public HashSet<Afdeling> Afdeling {
-		get { return _afdelingen; }
-		set { _afdelingen = value; }
-	}
-
+	public IReadOnlyCollection<Afdeling> Afdelingen => _afdelingen.AsReadOnly();
 }
