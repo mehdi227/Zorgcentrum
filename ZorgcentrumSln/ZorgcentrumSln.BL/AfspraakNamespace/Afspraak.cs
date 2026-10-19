@@ -14,11 +14,16 @@ public abstract class Afspraak {
         Patient = patient;
     }
 
-    private AfspraakId _afspraakId;
-
     public AfspraakId AfspraakId {
-        get { return _afspraakId; }
-        init;
+        get;
+    }
+
+    public override bool Equals(object? obj) {
+        return Equals(obj as Afspraak);
+    }
+    public bool Equals(Afspraak? other) {
+        return other is not null &&
+            this.AfspraakId == other.AfspraakId; //vergelijk op basis van de identiteit
     }
 
     private DateTime _datumTijdStart;

@@ -17,9 +17,15 @@ public class Afdeling {
 		// voeg arts toe aan lijst
 	}
 	public bool IsArtsIngeschreven(Arts arts) {
+		if (Artsen.Contains(arts)) {
+
+		}
 		return true;
 	}
 	public bool IsPatientIngeschreven(Patient patient) {
+		if (Patienten.Contains(patient)) {
+
+		}
 		return true;
 	}
 }

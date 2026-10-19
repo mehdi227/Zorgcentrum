@@ -10,17 +10,15 @@ public class Arts : Persoon {
     }
 
     private string _specialisatie;
-
 	public string Specialisatie {
 		get { return _specialisatie; }
-		set { _specialisatie = value; }
+		init { _specialisatie = value; }
 	}
 
 	private RizivNr _rizivNr;
-
     public RizivNr RizivNr {
 		get { return _rizivNr; }
-		set { _rizivNr = value; }
+		init { _rizivNr = value; }
 	}
 
 	public static Arts Create(RijksRegisterNr rrn, string naam, string voornaam, string specialisatie, RizivNr rizivNr) {

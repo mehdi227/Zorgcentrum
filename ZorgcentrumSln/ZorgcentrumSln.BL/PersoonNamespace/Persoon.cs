@@ -14,7 +14,7 @@ public abstract class Persoon {
 
 	public RijksRegisterNr Rrn {
 		get { return _rrn; }
-		set { _rrn = value; }
+		init { _rrn = value; }
 	}
 
 	private string _naam;
@@ -34,6 +34,10 @@ public abstract class Persoon {
     private readonly HashSet<Afdeling> _afdelingen;
     public IReadOnlyCollection<Afdeling> Afdelingen => _afdelingen.AsReadOnly();
 
+    private readonly List<Afspraak> _afspraken = new();
+    public IReadOnlyCollection<Afspraak> Afspraken => _afspraken.AsReadOnly();
+
+
     public void VoegAfspraakToe(Afspraak potentieleAfspraak) {
         foreach (Afspraak afspraakInLijst in Afspraken) {
             if (this is Patient) {
@@ -41,7 +45,7 @@ public abstract class Persoon {
                 potentieleAfspraak.DatumTijdStart.Day == afspraakInLijst.DatumTijdStart.Day)
                     throw new Exception("Een patient mag maar één afspraak bij dezelfde arts op dezelfde dag hebben.");
             }
-            
+
             if (potentieleAfspraak is Operatie) {
                 //duur 30min+
                 if (potentieleAfspraak.DatumTijdStart.TimeOfDay >= afspraakInLijst.DatumTijdStart.TimeOfDay &&
@@ -60,7 +64,4 @@ public abstract class Persoon {
         }
         _afspraken.Add(potentieleAfspraak);
     }
-
-    private readonly List<Afspraak> _afspraken = new();
-    public IReadOnlyCollection<Afspraak> Afspraken => _afspraken.AsReadOnly();
 }

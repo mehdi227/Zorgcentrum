@@ -1,4 +1,4 @@
 ﻿namespace ZorgcentrumSln.Buildingblocks.ValueObjects; 
-public class AfspraakId {
+public record AfspraakId {
 
 }
