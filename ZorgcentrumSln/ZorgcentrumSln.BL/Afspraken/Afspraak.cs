@@ -1,8 +1,8 @@
-﻿using ZorgcentrumSln.BL.AfdelingNamespace;
-using ZorgcentrumSln.BL.PersoonNamespace;
+﻿using ZorgcentrumSln.BL.Afdelingen;
+using ZorgcentrumSln.BL.Personen;
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
-namespace ZorgcentrumSln.BL.AfspraakNamespace;
+namespace ZorgcentrumSln.BL.Afspraken;
 //controleer het type afspraak door if(variable.GetType() == typeof(Consultatie))
 //TODO: maak van deze klasse een entiteit en gebruik aggregaat
 public abstract class Afspraak {

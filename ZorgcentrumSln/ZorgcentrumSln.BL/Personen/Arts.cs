@@ -1,7 +1,7 @@
 ﻿using ZorgcentrumSln.BL.AfspraakNamespace;
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
-namespace ZorgcentrumSln.BL.PersoonNamespace; 
+namespace ZorgcentrumSln.BL.Personen; 
 public class Arts : Persoon {
     private Arts(RijksRegisterNr rrn, string naam, string voornaam, string specialisatie, RizivNr rizivNr) 
 		: base(rrn, naam, voornaam) {

@@ -1,8 +1,8 @@
-﻿using ZorgcentrumSln.BL.AfdelingNamespace;
-using ZorgcentrumSln.BL.AfspraakNamespace;
+﻿using ZorgcentrumSln.BL.Afdelingen;
+using ZorgcentrumSln.BL.Afspraken;
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
-namespace ZorgcentrumSln.BL.PersoonNamespace; 
+namespace ZorgcentrumSln.BL.Personen; 
 public abstract class Persoon {
     protected Persoon(RijksRegisterNr rrn, string naam, string voornaam) {
         Rrn = rrn;

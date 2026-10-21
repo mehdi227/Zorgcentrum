@@ -1,6 +1,6 @@
-﻿using ZorgcentrumSln.BL.AfdelingNamespace;
+﻿using ZorgcentrumSln.BL.Afdelingen;
 
-namespace ZorgcentrumSln.BL.ZorgcentrumNamespace; 
+namespace ZorgcentrumSln.BL.Zorgcentrums; 
 public class Zorgcentrum {
 	private readonly HashSet<Afdeling> _afdelingen;
 

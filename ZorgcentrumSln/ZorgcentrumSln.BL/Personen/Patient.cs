@@ -1,8 +1,8 @@
-﻿using ZorgcentrumSln.BL.AfdelingNamespace;
-using ZorgcentrumSln.Buildingblocks.ValueObjects;
+﻿using ZorgcentrumSln.Buildingblocks.ValueObjects;
 using ZorgcentrumSln.BL.AfspraakNamespace;
+using ZorgcentrumSln.BL.Afdelingen;
 
-namespace ZorgcentrumSln.BL.PersoonNamespace;
+namespace ZorgcentrumSln.BL.Personen;
 
 public class Patient : Persoon {
     //constructor

@@ -1,6 +1,7 @@
-﻿using ZorgcentrumSln.BL.PersoonNamespace;
+﻿using ZorgcentrumSln.BL.Personen;
+using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
-namespace ZorgcentrumSln.BL.AfdelingNamespace;
+namespace ZorgcentrumSln.BL.Afdelingen;
 public class Afdeling {
 	private readonly HashSet<Arts> _artsen;
 
@@ -10,11 +11,11 @@ public class Afdeling {
 
 	public IReadOnlyCollection<Patient> Patienten => _patienten.AsReadOnly();
 
-	public void SchrijfPatientIn() {
+	public void SchrijfPatientIn(RijksRegisterNr rrn) {
 		// voeg patient toe aan lijst
 	}
-	public void ScrijfArtsIn() {
-		// voeg arts toe aan lijst
+	public void ScrijfArtsIn(RizivNr rizivNr) {
+		// TODO: zoek op basis van rizivNr
 	}
 	public bool IsArtsIngeschreven(Arts arts) {
 		if (Artsen.Contains(arts)) {
@@ -27,5 +28,8 @@ public class Afdeling {
 
 		}
 		return true;
+	}
+	public void VoegAfspraakToe(AfspraakId afspraakId) {
+
 	}
 }
