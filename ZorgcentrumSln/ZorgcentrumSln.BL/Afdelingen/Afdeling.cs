@@ -9,9 +9,15 @@ public class Afdeling {
 
     private readonly HashSet<Patient> _ingeschrevenPatienten = new();
     public IReadOnlyCollection<Patient> IngeschrevenPatienten => _ingeschrevenPatienten.AsReadOnly();
+    public void SchrijfPatientIn(Patient patient) {
+        _ingeschrevenPatienten.Add(patient);
+    }
 
     private readonly HashSet<Arts> _ingeschrevenArtsen = new();
     public IReadOnlyCollection<Arts> IngeschrevenArtsen => _ingeschrevenArtsen.AsReadOnly();
+    public void VerbindArtsMetAfdeling(Arts arts) {
+        _ingeschrevenArtsen.Add(arts);
+    }
 
     private readonly List<Afspraak> _afspraken = new();
     public IReadOnlyCollection<Afspraak> Afspraken => _afspraken.AsReadOnly();
