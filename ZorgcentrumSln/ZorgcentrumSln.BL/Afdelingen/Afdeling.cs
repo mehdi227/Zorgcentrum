@@ -1,35 +1,24 @@
-﻿using ZorgcentrumSln.BL.Personen;
-using ZorgcentrumSln.Buildingblocks.ValueObjects;
+﻿using ZorgcentrumSln.BL.Afspraken;
+using ZorgcentrumSln.BL.Personen;
 
 namespace ZorgcentrumSln.BL.Afdelingen;
+
 public class Afdeling {
-	private readonly HashSet<Arts> _artsen;
+    public Afdeling() { }
+    public string AfdelingId { get; init; }
 
-	public IReadOnlyCollection<Arts> Artsen => _artsen.AsReadOnly();
+    private readonly HashSet<Patient> _ingeschrevenPatienten = new();
+    public IReadOnlyCollection<Patient> IngeschrevenPatienten => _ingeschrevenPatienten.AsReadOnly();
 
-	private readonly HashSet<Patient> _patienten;
+    private readonly HashSet<Arts> _ingeschrevenArtsen = new();
+    public IReadOnlyCollection<Arts> IngeschrevenArtsen => _ingeschrevenArtsen.AsReadOnly();
 
-	public IReadOnlyCollection<Patient> Patienten => _patienten.AsReadOnly();
-
-	public void SchrijfPatientIn(RijksRegisterNr rrn) {
-		// voeg patient toe aan lijst
-	}
-	public void ScrijfArtsIn(RizivNr rizivNr) {
-		// TODO: zoek op basis van rizivNr
-	}
-	public bool IsArtsIngeschreven(Arts arts) {
-		if (Artsen.Contains(arts)) {
-
-		}
-		return true;
-	}
-	public bool IsPatientIngeschreven(Patient patient) {
-		if (Patienten.Contains(patient)) {
-
-		}
-		return true;
-	}
-	public void VoegAfspraakToe(AfspraakId afspraakId) {
-
-	}
+    private readonly List<Afspraak> _afspraken = new();
+    public IReadOnlyCollection<Afspraak> Afspraken => _afspraken.AsReadOnly();
+    public void VoegAfspraakToe(Afspraak afspraak) {
+        //TODO: de patient moet ingeschreven zijn op de afdeling
+        //TODO: de arts moet verbonden zijn aan de afdeling
+        //TODO: een patient mag maar een afspraak hebben bij dezelfde arts op dezelfde dag
+        _afspraken.Add(afspraak);
+    }
 }

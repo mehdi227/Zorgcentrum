@@ -1,5 +1,4 @@
-﻿using ZorgcentrumSln.BL.AfspraakNamespace;
-using ZorgcentrumSln.Buildingblocks.ValueObjects;
+﻿using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.BL.Personen; 
 public class Arts : Persoon {

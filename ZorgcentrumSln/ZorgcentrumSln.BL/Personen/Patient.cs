@@ -1,5 +1,4 @@
 ﻿using ZorgcentrumSln.Buildingblocks.ValueObjects;
-using ZorgcentrumSln.BL.AfspraakNamespace;
 using ZorgcentrumSln.BL.Afdelingen;
 
 namespace ZorgcentrumSln.BL.Personen;

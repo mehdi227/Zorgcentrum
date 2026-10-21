@@ -2,7 +2,8 @@
 
 namespace ZorgcentrumSln.BL.Zorgcentrums; 
 public class Zorgcentrum {
-	private readonly HashSet<Afdeling> _afdelingen;
+    public Zorgcentrum(){}
 
-	public IReadOnlyCollection<Afdeling> Afdelingen => _afdelingen.AsReadOnly();
+    private readonly HashSet<Afdeling> _afdelingen;
+    public IReadOnlyCollection<Afdeling> Afdelingen => _afdelingen.AsReadOnly();
 }
