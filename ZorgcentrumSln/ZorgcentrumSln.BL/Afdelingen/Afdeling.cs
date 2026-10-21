@@ -1,5 +1,7 @@
-﻿using ZorgcentrumSln.BL.Afspraken;
+﻿using System.Security.Cryptography.X509Certificates;
+using ZorgcentrumSln.BL.Afspraken;
 using ZorgcentrumSln.BL.Personen;
+using ZorgcentrumSln.Buildingblocks.Results;
 
 namespace ZorgcentrumSln.BL.Afdelingen;
 
@@ -21,10 +23,25 @@ public class Afdeling {
 
     private readonly List<Afspraak> _afspraken = new();
     public IReadOnlyCollection<Afspraak> Afspraken => _afspraken.AsReadOnly();
-    public void VoegAfspraakToe(Afspraak afspraak) {
+    public void VoegAfspraakToe(Result<Afspraak> afspraak) {
         //TODO: de patient moet ingeschreven zijn op de afdeling
         //TODO: de arts moet verbonden zijn aan de afdeling
+        if (IngeschrevenPatienten.Contains(afspraak.Value.Patient) && 
+            IngeschrevenArtsen.Contains(afspraak.Value.Arts)) {
+            bool bestaatAl = Afspraken.Any(a =>
+            a.Patient.Rrn == afspraak.Value.Patient.Rrn &&
+            a.Arts.RizivNr == afspraak.Value.Arts.RizivNr &&
+            a.DatumTijdStart.Day == afspraak.Value.DatumTijdStart.Day
+            );
+            if (!bestaatAl) {
+                _afspraken.Add(afspraak.Value);
+            } else {
+                //implementeer result
+            }
+            
+        } else {
+            //implementeer Result
+        }
         //TODO: een patient mag maar een afspraak hebben bij dezelfde arts op dezelfde dag
-        _afspraken.Add(afspraak);
     }
 }
