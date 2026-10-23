@@ -42,6 +42,5 @@ public class Afdeling {
         } else {
             //implementeer Result
         }
-        //TODO: een patient mag maar een afspraak hebben bij dezelfde arts op dezelfde dag
     }
 }

@@ -9,9 +9,6 @@ public class Patient : Persoon {
         : base(rrn, naam, voornaam) {
 
     }
-    //patient heeft lijst met ingeschreven afdelingen
-    private readonly HashSet<Afdeling> _afdelingen = new();
-    public IReadOnlyCollection<Afdeling> Afdelingen => _afdelingen.AsReadOnly();
 
     //Create methode
     public static Patient Create(RijksRegisterNr rrn, string naam, string voornaam) {
