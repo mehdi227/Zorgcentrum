@@ -30,10 +30,15 @@ public abstract class Persoon {
         get { return _voornaam; }
         init { _voornaam = value; }
     }
-    protected static Result<(RijksRegisterNr Rrn, String Naam, String Voornaam)> GetValidationErrors(
-        RijksRegisterNr rrn, string naam, string voornaam) {
+
+    protected static Result<(String Naam, String Voornaam, RijksRegisterNr Rrn)> GetValidationErrors(
+        string naam, string voornaam, RijksRegisterNr rrn) {
 
         List<Error> errors = new();
+
+        if (string.IsNullOrWhiteSpace(naam)) {
+            errors.Add(Error.Create("Naam mag niet leeg zijn"));
+        }
 
         var createRijksRegisterNummer = RijksRegisterNr.Create(rrn.Value);
 
@@ -41,15 +46,10 @@ public abstract class Persoon {
             errors.AddRange(createRijksRegisterNummer.Errors);
         }
 
-        if (string.IsNullOrWhiteSpace(naam)) {
-            errors.Add(Error.Create("Naam mag niet leeg zijn"));
-        }
-
         if (errors.Any()) {
-            return Result<(RijksRegisterNr Rrn, String Naam, String Voornaam)>.Failure(errors);
+            return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn) >.Failure(errors);
         }
 
-        return Result<(RijksRegisterNr Rrn, String Naam, String Voornaam)>.Succes((createRijksRegisterNummer.Value!, naam, voornaam));
-
+        return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn)>.Succes((naam, voornaam, createRijksRegisterNummer.Value!));
     }
 }
