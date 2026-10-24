@@ -44,22 +44,14 @@ public abstract class Afspraak {
 
     public Patient Patient {
         get { return _patient; }
-        init {
-            if (!Patient.Afdelingen.Contains(Afdeling)) throw 
-                    new Exception("De patient moet ingeschreven zijn op de afdeling van de afspraak.");
-            _patient = value;
-        }
+        init;
     }
 
     private Arts _arts;
 
     public Arts Arts {
         get { return _arts; }
-        init {
-            if (!Arts.Afdelingen.Contains(Afdeling)) throw 
-                    new Exception("De arts moet verbonden zijn aan de afdeling van de afspraak.");
-            _arts = value;
-        }
+        init;
     }
 
     private Afdeling _afdeling;
