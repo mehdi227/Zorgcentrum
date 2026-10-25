@@ -1,4 +1,5 @@
-﻿using ZorgcentrumSln.Buildingblocks.Results;
+﻿using ZorgcentrumSln.BL.Afspraken;
+using ZorgcentrumSln.Buildingblocks.Results;
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.BL.Personen;
@@ -29,6 +30,14 @@ public abstract class Persoon {
     public string Voornaam {
         get { return _voornaam; }
         init { _voornaam = value; }
+    }
+
+    public override bool Equals(object? obj) {
+        return Equals(obj as Persoon);
+    }
+    public bool Equals(Persoon? other) {
+        return other is not null &&
+            this.Rrn == other.Rrn; //vergelijk op basis van de identiteit
     }
 
     protected static Result<(String Naam, String Voornaam, RijksRegisterNr Rrn)> GetValidationErrors(

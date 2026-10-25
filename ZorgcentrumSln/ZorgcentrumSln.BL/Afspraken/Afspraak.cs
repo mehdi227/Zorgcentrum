@@ -1,5 +1,6 @@
 ﻿using ZorgcentrumSln.BL.Afdelingen;
 using ZorgcentrumSln.BL.Personen;
+using ZorgcentrumSln.Buildingblocks.Results;
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.BL.Afspraken;
@@ -59,5 +60,8 @@ public abstract class Afspraak {
     public Afdeling Afdeling {
         get { return _afdeling; }
         init { _afdeling = value; }
+    }
+    public static Result<()> GetValidationErrors() {
+
     }
 }
