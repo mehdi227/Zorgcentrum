@@ -42,23 +42,23 @@ public abstract class Persoon {
 
     protected static Result<(String Naam, String Voornaam, RijksRegisterNr Rrn)> GetValidationErrors(
         string naam, string voornaam, RijksRegisterNr rrn) {
-
+        //maak lege error lijst aan
         List<Error> errors = new();
-
+        //controleer geldigheid attributen met basis types op NULL
         if (string.IsNullOrWhiteSpace(naam)) {
             errors.Add(Error.Create("Naam mag niet leeg zijn"));
         }
-
+        //controleergeldigheid attributen die valueobjecten  of entities gebruiken met de create methode
         var createRijksRegisterNummer = RijksRegisterNr.Create(rrn.Value);
 
         if (createRijksRegisterNummer.IsFailure) {
             errors.AddRange(createRijksRegisterNummer.Errors);
         }
-
+        //als de error lijst niet leeg is dan return Result met errors
         if (errors.Any()) {
             return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn) >.Failure(errors);
         }
-
+        //alles is goed verlopen er zijn geen errors dus return Result met Object
         return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn)>.Succes((naam, voornaam, createRijksRegisterNummer.Value!));
     }
 }

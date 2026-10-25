@@ -19,14 +19,6 @@ public abstract class Afspraak {
         get;
     }
 
-    public override bool Equals(object? obj) {
-        return Equals(obj as Afspraak);
-    }
-    public bool Equals(Afspraak? other) {
-        return other is not null &&
-            this.AfspraakId == other.AfspraakId; //vergelijk op basis van de identiteit
-    }
-
     private DateTime _datumTijdStart;
 
     public DateTime DatumTijdStart {
@@ -61,7 +53,46 @@ public abstract class Afspraak {
         get { return _afdeling; }
         init { _afdeling = value; }
     }
-    public static Result<()> GetValidationErrors() {
+    public static Result<(AfspraakId AfspraakId, DateTime DatumTijdStart, int DuurMin, Patient Patient, Arts Arts, Afdeling Afdeling)> GetValidationErrors(
+        AfspraakId afspraakId, DateTime datumTijdStart, int duurMin, Patient patient, Arts arts, Afdeling afdeling) {
+        //maak lege error lijst aan
+        List<Error> errors = new();
+        //controleer geldigheid attributen met basis types op NULL
 
+        //controleergeldigheid attributen die valueobjecten of entities gebruiken met de create methode
+        var createAfspraakId = AfspraakId.Create(afspraakId.Value);
+
+        if (createAfspraakId.IsFailure) {
+            errors.AddRange(createAfspraakId.Errors);
+        }
+
+        var createPatient = Patient.Create(patient.Rrn, patient.Naam, patient.Voornaam, patient.Birthdate);
+
+        if (createPatient.IsFailure) {
+            errors.AddRange(createPatient.Errors);
+        }
+
+        var createArts = Arts.Create(arts.Rrn, arts.Naam, arts.Voornaam, arts.Specialisatie, arts.RizivNr);
+
+        if (createArts.IsFailure) {
+            errors.AddRange(createArts.Errors);
+        }
+
+        var createAfdeling = Afdeling.create(){
+
+        }
+        //als de error lijst niet leeg is dan return Result met errors
+        if (errors.Any()) {
+            return Result<(AfspraakId AfspraakId, DateTime DatumTijdStart, int DuurMin, Patient Patient, Arts Arts, Afdeling Afdeling)>.Failure(errors);
+        }
     }
+
+    public override bool Equals(object? obj) {
+        return Equals(obj as Afspraak);
+    }
+    public bool Equals(Afspraak? other) {
+        return other is not null &&
+            this.AfspraakId == other.AfspraakId; //vergelijk op basis van de identiteit
+    }
+
 }
