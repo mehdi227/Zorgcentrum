@@ -8,12 +8,12 @@ public record RijksRegisterNr {
         Value = value;
     }
     public static Result<RijksRegisterNr> Create(string value) {
-        if (IsRrnStructuurGeldig(value)) {
+        if (IsRrnStructuurValid(value) && IsChecksum97Valid(value)) {
             return Result<RijksRegisterNr>.Failure(Error.Create("Dit is geen geldig rijksregister nummer."));
         }
         return Result<RijksRegisterNr>.Succes(new RijksRegisterNr(value));
     }
-    public static bool IsRrnStructuurGeldig(string value) {
+    public static bool IsRrnStructuurValid(string value) {
         //structuur controle
         if (string.IsNullOrWhiteSpace(value) ||
             value.Length != 11 ||
@@ -36,5 +36,24 @@ public record RijksRegisterNr {
         return month >= 1 && month <= 12 &&
             day >= 1 &&
             day <= DateTime.DaysInMonth(year,month);
+    }
+    public static bool IsChecksum97Valid(string value) {
+        //eerste 9 digits
+        string DigitsAlsString = value[..9];
+
+        //parse eerste 9 digits naar int
+        int digits = int.Parse(DigitsAlsString);
+
+        //modulo97 van eerste 9 digits berekenen
+        int modulo = digits / 97;
+        modulo *= 97;
+        modulo -= digits;
+
+        int check = 97 - modulo;
+
+        string laatsteTweeDigits = value.Substring(9);
+        if (laatsteTweeDigits == check.ToString()) {
+            return true;
+        } else return false;
     }
 }

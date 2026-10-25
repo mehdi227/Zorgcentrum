@@ -78,7 +78,9 @@ public abstract class Afspraak {
             errors.AddRange(createArts.Errors);
         }
 
-        var createAfdeling = Afdeling.create(){
+        var createAfdeling = Afdeling.Create();
+
+        if () {
 
         }
         //als de error lijst niet leeg is dan return Result met errors

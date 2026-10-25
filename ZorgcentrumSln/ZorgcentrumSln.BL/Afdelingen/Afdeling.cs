@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using ZorgcentrumSln.BL.Afspraken;
+﻿using ZorgcentrumSln.BL.Afspraken;
 using ZorgcentrumSln.BL.Personen;
 using ZorgcentrumSln.Buildingblocks.Results;
 
@@ -7,7 +6,11 @@ namespace ZorgcentrumSln.BL.Afdelingen;
 
 public class Afdeling {
     public Afdeling() { }
-    public string AfdelingId { get; init; }
+    public static Result<Afdeling> Create() {
+
+    }
+    public string Code { get; init; }
+    public string Specialiteit { get; init; }
 
     private readonly HashSet<Patient> _ingeschrevenPatienten = new();
     public IReadOnlyCollection<Patient> IngeschrevenPatienten => _ingeschrevenPatienten.AsReadOnly();
