@@ -1,4 +1,5 @@
 ﻿using ZorgcentrumSln.Buildingblocks.ValueObjects;
+using ZorgcentrumSln.Buildingblocks.Results;
 
 namespace ZorgcentrumSln.BL.Personen; 
 public class Arts : Persoon {
@@ -20,7 +21,19 @@ public class Arts : Persoon {
 		init { _rizivNr = value; }
 	}
 
-	public static Arts Create(RijksRegisterNr rrn, string naam, string voornaam, string specialisatie, RizivNr rizivNr) {
-		return new Arts(rrn, naam, voornaam, specialisatie, rizivNr);
+	public static Result<Arts> Create(RijksRegisterNr rrn, string naam, string voornaam, string specialisatie, RizivNr rizivNr) {
+		//maak lege lijst aan
+		List<Error> errors = new();
+		//vraag aan de persoon klasse of er fouten zijn voor de gemeenschappelijke properties
+		var artsResult = Arts.GetValidationErrors(naam,voornaam,rrn);
+
+		if (artsResult.IsFailure) {
+			errors.AddRange(artsResult.Errors);
+		}
+
+		if (errors.Any()) {
+			return Result<Arts>.Failure(errors);
+		}
+        return Result<Arts>.Succes(new Arts(rrn,naam, voornaam, specialisatie, rizivNr));
 	}
 }
