@@ -1,5 +1,4 @@
-﻿using ZorgcentrumSln.BL.Afspraken;
-using ZorgcentrumSln.Buildingblocks.Results;
+﻿using ZorgcentrumSln.Buildingblocks.Results;
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.BL.Personen;
