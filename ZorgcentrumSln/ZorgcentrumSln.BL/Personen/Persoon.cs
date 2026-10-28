@@ -27,8 +27,8 @@ public abstract class Persoon {
             this.PersoonId == other.PersoonId; //vergelijk op basis van de identiteit
     }
 
-    protected static Result<(String Naam, String Voornaam, RijksRegisterNr Rrn)> GetValidationErrors(
-        string naam, string voornaam, RijksRegisterNr rrn) {
+    protected static Result<(String Naam, String Voornaam, RijksRegisterNr Rrn, PersoonId PersoonId)> GetValidationErrors(
+        PersoonId id, string naam, string voornaam, RijksRegisterNr rrn) {
         //maak lege error lijst aan
         List<Error> errors = new();
         //controleer geldigheid attributen met basis types op NULL
@@ -36,6 +36,12 @@ public abstract class Persoon {
             errors.Add(Error.Create("Naam mag niet leeg zijn"));
         }
         //controleergeldigheid attributen die valueobjecten  of entities gebruiken met de create methode
+        var createPersoonId = PersoonId.Create(PersoonId.CreateUnique().Value);
+
+        if (createPersoonId.IsFailure) {
+            errors.AddRange(createPersoonId.Errors);
+        }
+
         var createRijksRegisterNummer = RijksRegisterNr.Create(rrn.Value);
 
         if (createRijksRegisterNummer.IsFailure) {
@@ -43,9 +49,9 @@ public abstract class Persoon {
         }
         //als de error lijst niet leeg is dan return Result met errors
         if (errors.Any()) {
-            return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn)>.Failure(errors);
+            return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn, PersoonId PersoonId)>.Failure(errors);
         }
         //alles is goed verlopen er zijn geen errors dus return Result met Object
-        return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn)>.Succes((naam, voornaam, createRijksRegisterNummer.Value!));
+        return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn, PersoonId PersoonId)>.Succes((naam, voornaam, createRijksRegisterNummer.Value!, createPersoonId.Value!));
     }
 }
