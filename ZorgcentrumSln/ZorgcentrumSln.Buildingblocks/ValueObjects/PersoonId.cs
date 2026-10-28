@@ -1,9 +1,10 @@
 ﻿using ZorgcentrumSln.Buildingblocks.Results;
 
-namespace ZorgcentrumSln.Buildingblocks.ValueObjects; 
+namespace ZorgcentrumSln.Buildingblocks.ValueObjects;
+
 public sealed record PersoonId {
     public Guid Value;
-    
+
     private PersoonId(Guid id) {
         Value = id;
     }
