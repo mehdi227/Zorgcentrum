@@ -26,24 +26,25 @@ public class Afdeling {
 
     private readonly List<Afspraak> _afspraken = new();
     public IReadOnlyCollection<Afspraak> Afspraken => _afspraken.AsReadOnly();
-    public void VoegAfspraakToe(Result<Afspraak> afspraak) {
-        //TODO: de patient moet ingeschreven zijn op de afdeling
-        //TODO: de arts moet verbonden zijn aan de afdeling
-        if (IngeschrevenPatienten.Contains(afspraak.Value.Patient) && 
-            IngeschrevenArtsen.Contains(afspraak.Value.Arts)) {
-            bool bestaatAl = Afspraken.Any(a =>
-            a.Patient.Rrn == afspraak.Value.Patient.Rrn &&
-            a.Arts.RizivNr == afspraak.Value.Arts.RizivNr &&
-            a.DatumTijdStart.Day == afspraak.Value.DatumTijdStart.Day
-            );
-            if (!bestaatAl) {
-                _afspraken.Add(afspraak.Value);
-            } else {
-                //implementeer result
-            }
-            
+    public Result VoegAfspraakToe(Afspraak afspraak) {
+        List<Error> errors = new();
+        if (!IngeschrevenArtsen.Contains(afspraak.Arts)) {
+            errors.Add(new Error("De arts verbonden met deze afspraak is niet ingeschreven op deze afdeling."));
+        }
+        if (!IngeschrevenArtsen.Contains(afspraak.Arts)) {
+            errors.Add(new Error("De patient verbonden met deze afspraak is niet ingeschreven op deze afdeling."));
+        }
+        if (Afspraken.Any(a =>
+            a.Patient.Rrn == afspraak.Patient.Rrn &&
+            a.Arts.RizivNr == afspraak.Arts.RizivNr &&
+            a.DatumTijdStart.Day == afspraak.DatumTijdStart.Day)) {
+            errors.Add(new Error("Deze afpraak zou overlappen met een bestaande afspraak."));
+        }
+        if (errors.Any()) {
+            return Result.Failure(errors);
         } else {
-            //implementeer Result
+            _afspraken.Add(afspraak);
+            return Result.Succes();
         }
     }
 }

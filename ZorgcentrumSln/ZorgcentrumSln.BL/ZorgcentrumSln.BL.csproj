@@ -10,8 +10,4 @@
     <ProjectReference Include="..\ZorgcentrumSln.Buildingblocks\ZorgcentrumSln.Buildingblocks.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>
