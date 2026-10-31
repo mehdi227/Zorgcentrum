@@ -1,21 +1,36 @@
-﻿using ZorgcentrumSln.BL.Afdelingen;
-using ZorgcentrumSln.BL.Personen;
+﻿using ZorgcentrumSln.Buildingblocks.Results;
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
-namespace ZorgcentrumSln.BL.Afspraken; 
+namespace ZorgcentrumSln.BL.Afspraken;
+
 public class Operatie : Afspraak {
-    public Operatie(AfspraakId afspraakId, DateTime datumTijdStart, int duurMin, Afdeling afdeling, Patient patient, Arts arts, string beschrijving)
-        : base(afspraakId, datumTijdStart, duurMin, afdeling, patient, arts) {
-        if (duurMin! >= 30)
-            throw new Exception("De tijdstip van een operatie moet minstens 30 minuten zijn.");
-        if (string.IsNullOrWhiteSpace(beschrijving))
-            throw new Exception("Beschrijving mag niet leeg zijn");
+    public string Beschrijving { get; }
+
+    public Operatie(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, PersoonId patientId, PersoonId artsId, string beschrijving)
+        : base(id, datumTijdStart, duurMin, afdelingId, patientId, artsId) {
         Beschrijving = beschrijving;
     }
 
-    private string _beschrijving;
-    public string Beschrijving {
-		get { return _beschrijving; }
-        init;
-	}
+    public static Result<Operatie> Create(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, PersoonId patientId, PersoonId artsId, string beschrijving) {
+        List<Error> errors = new();
+
+        var createcommons = CreateCommons(id, datumTijdStart, duurMin, patientId, artsId, afdelingId);
+        if (createcommons.IsFailure) {
+            errors.AddRange(createcommons.Errors);
+        }
+
+        if (!(duurMin >= 10)) {
+            errors.Add(Error.Create("een consultatie heeft een duurtijd van minstens 10 minuten."));
+        }
+
+        if (string.IsNullOrWhiteSpace(beschrijving)) {
+            errors.Add(Error.Create("De beschrijving mag niet leeg zijn."));
+        }
+
+        if (errors.Any()) {
+            return Result<Operatie>.Failure(errors);
+        }
+
+        return Result<Operatie>.Succes(new Operatie(id, datumTijdStart, duurMin, afdelingId, patientId, artsId, beschrijving));
+    }
 }
