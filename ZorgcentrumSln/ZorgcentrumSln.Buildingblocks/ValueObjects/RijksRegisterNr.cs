@@ -8,7 +8,7 @@ public record RijksRegisterNr {
         Value = value;
     }
     public static Result<RijksRegisterNr> Create(string value) {
-        if (IsRrnStructuurValid(value) && IsChecksum97Valid(value)) {
+        if (!IsRrnStructuurValid(value) && !IsChecksum97Valid(value)) {
             return Result<RijksRegisterNr>.Failure(Error.Create("Dit is geen geldig rijksregister nummer."));
         }
         return Result<RijksRegisterNr>.Succes(new RijksRegisterNr(value));

@@ -29,9 +29,9 @@ public abstract class Persoon {
         return other is not null &&
             this.PersoonId == other.PersoonId; //vergelijk op basis van de identiteit
     }
-    public static Result RrnBirthdateCorrelatieValid(RijksRegisterNr rrn, DateOnly birthdate) {
+    public static Result RrnBirthdateCorrelatieValid(string rrn, DateOnly birthdate) {
         string date = DateOnly.ParseExact(birthdate.ToString(), "yy-MM-dd", CultureInfo.InvariantCulture).ToString();
-        string rrnDate = rrn.Value[..6];
+        string rrnDate = rrn[..6];
         if (date == rrnDate) {
             return Result.Succes();
         } else return Result.Failure(new Error("RijksregisterNummer komt niet overeen met de geboortedatum"));
@@ -58,8 +58,8 @@ public abstract class Persoon {
         if (createRijksRegisterNummer.IsFailure) {
             errors.AddRange(createRijksRegisterNummer.Errors);
         }
-        //controleer
-        var rrnValid = Persoon.RrnBirthdateCorrelatieValid(rrn, birthdate);
+        //controleer of rijksregister
+        var rrnValid = Persoon.RrnBirthdateCorrelatieValid(rrn.Value, birthdate);
         if (rrnValid.IsFailure) {
             errors.AddRange(rrnValid.Errors);
         }
