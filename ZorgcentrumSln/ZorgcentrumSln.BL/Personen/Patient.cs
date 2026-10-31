@@ -1,18 +1,14 @@
 ﻿using ZorgcentrumSln.Buildingblocks.ValueObjects;
-using ZorgcentrumSln.BL.Afdelingen;
 using ZorgcentrumSln.Buildingblocks.Results;
-using Microsoft.VisualBasic;
-using System.Globalization;
 
 namespace ZorgcentrumSln.BL.Personen;
 
 public class Patient : Persoon {
-    //constructor
+    
     private Patient(PersoonId id, RijksRegisterNr rrn, string naam, string voornaam, DateOnly birthdate)
         : base(id, rrn, naam, voornaam, birthdate) {
     }
     
-
     public static Result<Patient> Create(PersoonId id, RijksRegisterNr rrn, string naam, string voornaam, DateOnly birthdate) {
         //maak lege lijst van errors aan
         List<Error> errors = new();

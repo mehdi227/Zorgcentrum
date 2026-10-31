@@ -22,13 +22,6 @@ public abstract class Persoon {
 
     public string Voornaam { get; }
 
-    public override bool Equals(object? obj) {
-        return Equals(obj as Persoon);
-    }
-    public bool Equals(Persoon? other) {
-        return other is not null &&
-            this.PersoonId == other.PersoonId; //vergelijk op basis van de identiteit
-    }
     public static Result RrnBirthdateCorrelatieValid(string rrn, DateOnly birthdate) {
         string date = DateOnly.ParseExact(birthdate.ToString(), "yy-MM-dd", CultureInfo.InvariantCulture).ToString();
         string rrnDate = rrn[..6];
@@ -68,6 +61,14 @@ public abstract class Persoon {
             return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn, PersoonId PersoonId, DateOnly Birthdate)>.Failure(errors);
         }
         //alles is goed verlopen er zijn geen errors dus return Result met Object
+        
         return Result<(String Naam, String Voornaam, RijksRegisterNr Rrn, PersoonId PersoonId,DateOnly Birthdate)>.Succes((naam, voornaam, createRijksRegisterNummer.Value!, createPersoonId.Value!,birthdate));
+    }
+    public override bool Equals(object? obj) {
+        return Equals(obj as Persoon);
+    }
+    public bool Equals(Persoon? other) {
+        return other is not null &&
+            this.PersoonId == other.PersoonId; //vergelijk op basis van de identiteit
     }
 }
