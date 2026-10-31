@@ -53,7 +53,7 @@ public abstract class Afspraak {
         get { return _afdeling; }
         init { _afdeling = value; }
     }
-    public static Result<(AfspraakId AfspraakId, DateTime DatumTijdStart, int DuurMin, Patient Patient, Arts Arts, Afdeling Afdeling)> GetValidationErrors(
+    public static Result<(AfspraakId AfspraakId, DateTime DatumTijdStart, int DuurMin, Patient Patient, Arts Arts, Afdeling Afdeling)> CreateCommons(
         AfspraakId afspraakId, DateTime datumTijdStart, int duurMin, Patient patient, Arts arts, Afdeling afdeling) {
         //maak lege error lijst aan
         List<Error> errors = new();
@@ -66,7 +66,7 @@ public abstract class Afspraak {
             errors.AddRange(createAfspraakId.Errors);
         }
 
-        var createPatient = Patient.Create(patient.Rrn, patient.Naam, patient.Voornaam, patient.Birthdate);
+        var createPatient = Patient.Create(patient.PersoonId, patient.Rrn, patient.Naam, patient.Voornaam, patient.Birthdate);
 
         if (createPatient.IsFailure) {
             errors.AddRange(createPatient.Errors);
@@ -78,15 +78,16 @@ public abstract class Afspraak {
             errors.AddRange(createArts.Errors);
         }
 
-        var createAfdeling = Afdeling.Create();
+        var createAfdeling = Afdeling.Create(afdeling.Id, afdeling.Naam, afdeling.Code,afdeling.Specialiteit);
 
-        if () {
-
+        if (createAfdeling.IsFailure) {
+            errors.AddRange(createAfdeling.Errors);
         }
         //als de error lijst niet leeg is dan return Result met errors
         if (errors.Any()) {
             return Result<(AfspraakId AfspraakId, DateTime DatumTijdStart, int DuurMin, Patient Patient, Arts Arts, Afdeling Afdeling)>.Failure(errors);
         }
+        return Result<(AfspraakId AfspraakId, DateTime DatumTijdStart, int DuurMin, Patient Patient, Arts Arts, Afdeling Afdeling)>.Succes((afspraakId,datumTijdStart,duurMin,patient,arts,afdeling));
     }
 
     public override bool Equals(object? obj) {
