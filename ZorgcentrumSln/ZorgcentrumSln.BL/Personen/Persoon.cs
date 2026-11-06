@@ -6,14 +6,14 @@ namespace ZorgcentrumSln.BL.Personen;
 
 public abstract class Persoon {
     protected Persoon(PersoonId id, RijksRegisterNr rrn, string naam, string voornaam, DateOnly birthdate) {
-        PersoonId = id;
+        Id = id;
         Rrn = rrn;
         Naam = naam;
         Voornaam = voornaam;
         Birthdate = birthdate;
     }
 
-    public PersoonId PersoonId { get; }
+    public PersoonId Id { get; }
 
     public RijksRegisterNr Rrn { get; }
     public DateOnly Birthdate { get; init; }
@@ -69,6 +69,6 @@ public abstract class Persoon {
     }
     public bool Equals(Persoon? other) {
         return other is not null &&
-            this.PersoonId == other.PersoonId; //vergelijk op basis van de identiteit
+            this.Id == other.Id; //vergelijk op basis van de identiteit
     }
 }

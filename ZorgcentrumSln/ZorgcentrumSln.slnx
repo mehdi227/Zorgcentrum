@@ -12,7 +12,7 @@
     <Project Path="ZorgcentrumSln.BL/ZorgcentrumSln.BL.csproj" />
   </Folder>
   <Folder Name="/04 Infrastructuur/">
-    <Project Path="ZorgcentrumSln.AfspraakRepoHardcoded/ZorgcentrumSln.AfspraakRepoHardcoded.csproj" Id="b72cd9dc-a505-4759-8a77-d83507c7cc77" />
+    <Project Path="ZorgcentrumSln.AfspraakRepoHardcoded/ZorgcentrumSln.Infrastructuur.PersistentieHardcoded.csproj" Id="b72cd9dc-a505-4759-8a77-d83507c7cc77" />
     <Project Path="ZorgcentrumSln.PersistentieBestand/ZorgcentrumSln.PersistentieBestand.csproj" Id="f4ed6bdb-54bd-4fa8-acdc-bbeadcb7a581" />
   </Folder>
   <Folder Name="/05 xUnit Tests/">
