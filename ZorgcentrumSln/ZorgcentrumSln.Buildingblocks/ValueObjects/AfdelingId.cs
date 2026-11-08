@@ -15,4 +15,6 @@ public class AfdelingId {
         }
         return Result<AfdelingId>.Succes(new AfdelingId(id));
     }
+
+    public static AfdelingId CreateUnique() => new(Guid.NewGuid());
 }

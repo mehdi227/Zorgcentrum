@@ -6,11 +6,11 @@ namespace ZorgcentrumSln.BL.Interfaces;
 public interface IArtsReposityReadOnly {
     Arts? GetById(PersoonId id);
 
-    IEnumerable<Arts> GetAll();
+    IEnumerable<Arts?> GetAll();
 }
 
 public interface IArtsRepository : IArtsReposityReadOnly {
-    bool Insert(Arts arts);
-    bool Update(Arts arts);
+    bool Insert(Arts? arts);
+    bool Update(Arts? arts);
     bool Delete(PersoonId id);
 }

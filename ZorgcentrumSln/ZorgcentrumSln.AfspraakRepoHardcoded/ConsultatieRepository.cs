@@ -6,12 +6,14 @@ using ZorgcentrumSln.Buildingblocks.ValueObjects;
 namespace ZorgcentrumSln.Infrastructuur.PersistentieHardcoded {
     public class ConsultatieRepository : IConsultatieRepository {
         private HashSet<Consultatie> _afspraken = new() {
-            Consultatie.Create(),
-            Consultatie.Create(),
-            Consultatie.Create(),
-            Consultatie.Create(),
-            Consultatie.Create(),
-            Consultatie.Create(),
+            Consultatie.Create(
+                AfspraakId.CreateUnique(),
+                new DateTime(),
+                30,
+                AfdelingId.CreateUnique(),
+                PersoonId.CreateUnique(),
+                PersoonId.CreateUnique()
+                ).Value!
         };
         public Consultatie? GetById(AfspraakId id) {
             Consultatie? consultatie = null;

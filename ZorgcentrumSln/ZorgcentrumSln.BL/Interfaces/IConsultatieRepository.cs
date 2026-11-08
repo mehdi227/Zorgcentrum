@@ -6,11 +6,11 @@ namespace ZorgcentrumSln.BL.Interfaces;
 public interface IConsultatieReposityReadOnly {
     Consultatie? GetById(AfspraakId id);
 
-    IEnumerable<Consultatie> GetAll();
+    IEnumerable<Consultatie?> GetAll();
 }
 
 public interface IConsultatieRepository : IConsultatieReposityReadOnly {
-    bool Insert(Consultatie afspraak);
-    bool Update(Consultatie afspraak);
+    bool Insert(Consultatie? consultatie);
+    bool Update(Consultatie? consultatie);
     bool Delete(AfspraakId id);
 }
