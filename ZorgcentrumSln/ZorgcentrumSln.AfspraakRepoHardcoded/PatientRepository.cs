@@ -75,7 +75,7 @@ public class PatientRepository : IPatientRepository {
             return false;
         }
 
-        Delete(patient.Id);
+        Delete(oldPatient.Id);
         Insert(patient);
         return true;
     }
