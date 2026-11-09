@@ -45,13 +45,13 @@ public class ArtsRepository : IArtsRepository {
         return _artsen.Add(arts);
     }
     public bool Update(Arts arts) {
-        Arts? oldPatient = GetById(arts.Id);
+        Arts? oldArts = GetById(arts.Id);
 
-        if (oldPatient is null) {
+        if (oldArts is null) {
             return false;
         }
 
-        Delete(arts.Id);
+        Delete(oldArts.Id);
         Insert(arts);
         return true;
     }
