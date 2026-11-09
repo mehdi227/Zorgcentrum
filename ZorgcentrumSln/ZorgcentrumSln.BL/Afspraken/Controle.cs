@@ -1,4 +1,5 @@
-﻿using ZorgcentrumSln.Buildingblocks.ValueObjects;
+﻿using ZorgcentrumSln.Buildingblocks.Results;
+using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.BL.Afspraken;
 
@@ -12,5 +13,7 @@ public class Controle : Afspraak {
     public AfspraakId ReferentieAfspraakID { get; init; }
     //TODO: controle of referentie-afspraak tijdstip eerder is dan tijdstip van de controle-afspraak
     //TODO: De controle afspraak dient te gebeuren op dezelfde afdeling als de eerdere afpsraak en is voor dezelfde patient
+    public static Result<Controle> Create() {
 
+    }
 }
