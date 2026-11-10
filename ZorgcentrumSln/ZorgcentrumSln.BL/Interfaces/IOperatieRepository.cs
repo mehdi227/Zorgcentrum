@@ -7,7 +7,7 @@ public interface IOperatieRepositoryReadOnly {
 
     IEnumerable<Operatie?> GetAll();
 }
-public interface IOperatieRepository {
+public interface IOperatieRepository : IOperatieRepositoryReadOnly {
     bool Insert(Operatie? operatie);
     bool Update(Operatie? operatie);
     bool Delete(AfspraakId id);
