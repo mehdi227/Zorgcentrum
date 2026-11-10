@@ -5,12 +5,14 @@ using ZorgcentrumSln.Buildingblocks.ValueObjects;
 namespace ZorgcentrumSln.Infrastructuur.PersistentieHardcoded; 
 public class ArtsRepository : IArtsRepository {
     private HashSet<Arts> _artsen = new() {
-        Arts.Create().Value!,
-        Arts.Create().Value!,
-        Arts.Create().Value!,
-        Arts.Create().Value!,
-        Arts.Create().Value!,
-        Arts.Create().Value!,
+        Arts.Create(PersoonId.CreateUnique(),
+            RijksRegisterNr.Create("85073012345").Value!,
+            "naam1",
+            "voornaam1",
+            new DateOnly(2003,01,31),
+            "specialisatie1",
+            RizivNr.Create("10001234567").Value!
+            ).Value!
     };
 
     public Arts? GetById(PersoonId id) {

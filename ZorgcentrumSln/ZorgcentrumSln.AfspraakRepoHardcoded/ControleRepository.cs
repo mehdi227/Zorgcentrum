@@ -1,13 +1,32 @@
-﻿using System.Xml.Linq;
-using ZorgcentrumSln.BL.Afspraken;
+﻿using ZorgcentrumSln.BL.Afspraken;
 using ZorgcentrumSln.BL.Interfaces;
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
-namespace ZorgcentrumSln.Infrastructuur.PersistentieHardcoded; 
-public class ControleRepository: IControleRepository {
+namespace ZorgcentrumSln.Infrastructuur.PersistentieHardcoded;
+
+public class ControleRepository : IControleRepository {
     private HashSet<Controle> _controles = new() {
-        Controle.Create().Value!,
-        Controle.Create().Value!
+        Controle.Create(AfspraakId.CreateUnique(),
+            new DateTime(2024, 7, 18, 14, 32, 45),
+            10,
+            AfdelingId.CreateUnique(),
+            PersoonId.CreateUnique(),
+            PersoonId.CreateUnique(),
+            AfspraakId.CreateUnique()).Value!,
+        Controle.Create(AfspraakId.CreateUnique(),
+            new DateTime(2024, 8, 5, 9, 15, 30),
+            15,
+            AfdelingId.CreateUnique(),
+            PersoonId.CreateUnique(),
+            PersoonId.CreateUnique(),
+            AfspraakId.CreateUnique()).Value!,
+        Controle.Create(AfspraakId.CreateUnique(),
+            new DateTime(2024, 9, 12, 11, 45, 0),
+            20,
+            AfdelingId.CreateUnique(),
+            PersoonId.CreateUnique(),
+            PersoonId.CreateUnique(),
+            AfspraakId.CreateUnique()).Value!
     };
 
     public Controle? GetById(AfspraakId id) {

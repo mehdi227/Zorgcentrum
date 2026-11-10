@@ -3,7 +3,7 @@ using ZorgcentrumSln.Buildingblocks.Results;
 
 namespace ZorgcentrumSln.Buildingblocks.ValueObjects; 
 public record RijksRegisterNr {
-    public string Value { get; set; }
+    public string Value { get; }
     private RijksRegisterNr(string value) {
         Value = value;
     }
