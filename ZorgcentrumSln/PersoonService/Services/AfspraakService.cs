@@ -16,7 +16,7 @@ namespace ZorgcentrumSln.ApplicationServicesProject.Services {
             _operatieRepository = operatieRepo;
             _controleRepository = controleRepo;
         }
-        public IReadOnlyCollection<AfspraakDto> GeefBeschikbareAfspraken() {
+        public IReadOnlyCollection<AfspraakDto> GeefBeschikbareAfsprakenc() {
             IEnumerable<Consultatie> consultaties = _consultatieRepository.GetAll();
             IEnumerable<Operatie> operaties = _operatieRepository.GetAll();
             IEnumerable<Controle> controles = _controleRepository.GetAll();
@@ -44,9 +44,7 @@ namespace ZorgcentrumSln.ApplicationServicesProject.Services {
 
             return Result.Succes();
         }
-
-
-
+        
 
     }
 }
