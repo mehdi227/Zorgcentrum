@@ -16,6 +16,9 @@
     <Project Path="ZorgcentrumSln.PersistentieBestand/ZorgcentrumSln.PersistentieBestand.csproj" Id="f4ed6bdb-54bd-4fa8-acdc-bbeadcb7a581" />
   </Folder>
   <Folder Name="/05 xUnit Tests/">
-    <Project Path="ZorgcentrumSln.BL.xUnitTestProject/ZorgcentrumSln.BL.xUnitTestProject.csproj" />
+    <Project Path="ZorgcentrumSln.ApplicationServices/ZorgcentrumSln.ApplicationServices.UT.csproj" Id="95429bc1-f0f6-4b00-a8ab-ff233f45e33a" />
+    <Project Path="ZorgcentrumSln.BL.xUnitTestProject/ZorgcentrumSln.Domein.UT.csproj" />
+    <Project Path="ZorgcentrumSln.BuildingBlocks.UT/ZorgcentrumSln.BuildingBlocks.UT.csproj" Id="29fd0b98-b9cd-4c84-adcf-8804fb42c056" />
+    <Project Path="ZorgcentrumSln.Infrastructuur/ZorgcentrumSln.Infrastructuur.UT.csproj" Id="95473cc7-6827-4eb2-b03d-419521ccbb1e" />
   </Folder>
 </Solution>
