@@ -44,7 +44,15 @@ namespace ZorgcentrumSln.ApplicationServicesProject.Services {
 
             return Result.Succes();
         }
-        
 
+        public Result<AfspraakDto> VoegConsultatieToe(Afspraak newAfspraak) {
+            bool result = _consultatieRepository.Insert(newAfspraak);
+
+            if (!result) {
+                return Result<ConsultatieDto>.Failure(Error.Create("De insert kon niet worden uitgevoerd"));
+            }
+
+            return Result<ConsultatieDto>.Succes(AfspraakDtoFactory.CreateAfspraakDto(newAfspraak));
+        }
     }
 }

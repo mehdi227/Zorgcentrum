@@ -12,7 +12,7 @@ public record RizivNr {
         return Result<RizivNr>.Succes(new RizivNr(value));
     }
 
-    public static Result IsCheckSumValid() {
+    public static Result IsChecksumValid() {
         throw new NotImplementedException();
     }
     public static Result IsStructuurValid() {
