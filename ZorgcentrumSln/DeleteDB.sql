@@ -1,0 +1,10 @@
+﻿USE zorgcentrumDB;
+GO
+
+DROP TABLE IF EXISTS Consultaties;
+DROP TABLE IF EXISTS Controles;
+DROP TABLE IF EXISTS Operaties;
+DROP TABLE IF EXISTS Afspraken;
+DROP TABLE IF EXISTS Patienten;
+DROP TABLE IF EXISTS Artsen;
+GO
