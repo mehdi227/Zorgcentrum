@@ -6,17 +6,17 @@ using ZorgcentrumSln.Buildingblocks.ValueObjects;
 namespace ZorgcentrumSln.BL.Afdelingen;
 
 public class Afdeling {
+    public AfdelingId Id { get; }
+    public string Naam { get; }
+    public string Code { get; }
+    public string Specialiteit { get; }
+
     public Afdeling(AfdelingId id, string naam, string code, string specialiteit) {
         Id = id;
         Naam = naam;
         Code = code;
         Specialiteit = specialiteit;
     }
-
-    public AfdelingId Id { get; }
-    public string Naam { get; }
-    public string Code { get; }
-    public string Specialiteit { get; }
 
     public static Result<Afdeling> Create(AfdelingId id,string naam,string code, string specialiteit) {
         List<Error> errors = new();
