@@ -4,12 +4,12 @@ using ZorgcentrumSln.Buildingblocks.ValueObjects;
 namespace ZorgcentrumSln.BL.Afspraken;
 //TODO: maak van deze klasse een entiteit en gebruik aggregaat
 public abstract class Afspraak {
-    protected Afspraak(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, PersoonId patientId, PersoonId artsId) {
+    protected Afspraak(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, RijksRegisterNr patientRrn, RizivNr artsRizivNr) {
         AfspraakID = id;
         DatumTijdStart = datumTijdStart;
         DuurMin = duurMin;
         AfdelingID = afdelingId;
-        PatientID = patientId;
+        PatientRrn = patientRrn;
     }
 
     public AfspraakId AfspraakID { get; }
@@ -18,9 +18,9 @@ public abstract class Afspraak {
 
     public int DuurMin { get; }
 
-    public RijksRegisterNr PatientID { get; }
+    public RijksRegisterNr PatientRrn { get; }
 
-    public RizivNr ArtsID { get; }
+    public RizivNr artsRizivNr { get; }
 
     public AfdelingId AfdelingID { get; }
 

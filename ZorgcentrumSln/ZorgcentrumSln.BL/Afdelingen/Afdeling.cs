@@ -69,15 +69,15 @@ public class Afdeling {
     public IReadOnlyCollection<Afspraak> Afspraken => _afspraken.AsReadOnly();
     public Result VoegAfspraakToe(Afspraak afspraak) {
         List<Error> errors = new();
-        if (!IngeschrevenArtsen.Contains(afspraak.ArtsID)) {
+        if (!IngeschrevenArtsen.Contains(afspraak.artsRizivNr)) {
             errors.Add(new Error("De arts verbonden met deze afspraak is niet ingeschreven op deze afdeling."));
         }
-        if (!IngeschrevenPatienten.Contains(afspraak.PatientID)) {
+        if (!IngeschrevenPatienten.Contains(afspraak.PatientRrn)) {
             errors.Add(new Error("De patient verbonden met deze afspraak is niet ingeschreven op deze afdeling."));
         }
         if (Afspraken.Any(a =>
-            a.Patient.Rrn == afspraak.Patient.Rrn &&
-            a.Arts.RizivNr == afspraak.Arts.RizivNr &&
+            a.PatientRrn == afspraak.PatientRrn &&
+            a.artsRizivNr == afspraak.artsRizivNr &&
             a.DatumTijdStart.Day == afspraak.DatumTijdStart.Day)) {
             errors.Add(new Error("Deze afpraak zou overlappen met een bestaande afspraak."));
         }

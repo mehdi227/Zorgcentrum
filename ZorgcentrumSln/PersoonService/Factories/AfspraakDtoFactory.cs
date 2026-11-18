@@ -10,16 +10,16 @@ namespace ZorgcentrumSln.ApplicationServicesProject.Factories {
                     consultatie.DatumTijdStart,
                     consultatie.DuurMin,
                     consultatie.AfdelingID,
-                    consultatie.PatientID,
-                    consultatie.ArtsID),
+                    consultatie.PatientRrn,
+                    consultatie.artsRizivNr),
 
                 Operatie operatie => new OperatieDto(
                     operatie.AfspraakID,
                     operatie.DatumTijdStart,
                     operatie.DuurMin,
                     operatie.AfdelingID,
-                    operatie.PatientID,
-                    operatie.ArtsID,
+                    operatie.PatientRrn,
+                    operatie.artsRizivNr,
                     operatie.Beschrijving),
 
                 Controle controle => new ControleDto(
@@ -27,8 +27,8 @@ namespace ZorgcentrumSln.ApplicationServicesProject.Factories {
                     controle.DatumTijdStart,
                     controle.DuurMin,
                     controle.AfdelingID,
-                    controle.PatientID,
-                    controle.ArtsID,
+                    controle.PatientRrn,
+                    controle.artsRizivNr,
                     controle.ReferentieAfspraakID)
 
             };
