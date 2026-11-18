@@ -7,8 +7,9 @@ CREATE TABLE Artsen (
     Voornaam VARCHAR(50) NOT NULL,
     Achternaam VARCHAR(50) NOT NULL,
     Specialisatie VARCHAR(100),
-    Telefoonnummer VARCHAR(20),
-    Email VARCHAR(100) UNIQUE
+    Afdelingen VARCHAR(300),
+    Riziv_Nummer VARCHAR(11) UNIQUE,
+    Rijks_Register_Nummer VARCHAR(11) UNIQUE
 );
 GO
 
@@ -21,9 +22,8 @@ CREATE TABLE Patienten (
     PatientID INT IDENTITY(1,1) PRIMARY KEY,
     Voornaam VARCHAR(50) NOT NULL,
     Achternaam VARCHAR(50) NOT NULL,
-    Geboortedatum DATE NOT NULL,
-    Telefoonnummer VARCHAR(20),
-    Email VARCHAR(100) UNIQUE
+    Afdelingen VARCHAR(300),
+    Rijks_Register_Nummer VARCHAR(11) UNIQUE
 );
 GO
 
@@ -34,12 +34,13 @@ GO
 
 CREATE TABLE Afspraken (
     AfspraakID INT IDENTITY(1,1) PRIMARY KEY,
-    ArtsID INT NOT NULL,
-    PatientID INT NOT NULL,
-    Datum DATE NOT NULL,
-    Tijd TIME NOT NULL,
-    Status VARCHAR(30) NOT NULL,
-    Type VARCHAR(20) NOT NULL,
+    AfspraakType VARCHAR(30) NOT NULL,
+    Datum VARCHAR(100) NOT NULL,
+    Tijd VARCHAR(100) NOT NULL,
+    Duur VARCHAR(30) NOT NULL,
+    Rijks_Register_Nummer_Patient VARCHAR(11) UNIQUE,
+    Rijks_Register_Nummer_Arts VARCHAR(11) UNIQUE,
+    AfdelingsCode VARCHAR(20)
 
     FOREIGN KEY (ArtsID)
         REFERENCES Artsen(ArtsID),
@@ -58,8 +59,6 @@ GO
 
 CREATE TABLE Consultaties (
     AfspraakID INT PRIMARY KEY,
-    Diagnose VARCHAR(255),
-    Opmerkingen VARCHAR(MAX),
 
     FOREIGN KEY (AfspraakID)
         REFERENCES Afspraken(AfspraakID)
@@ -73,8 +72,7 @@ GO
 
 CREATE TABLE Controles (
     AfspraakID INT PRIMARY KEY,
-    ReferentieAfspraakID INT NOT NULL,
-    Resultaat VARCHAR(MAX),
+    ReferentieAfspraakID VARCHAR(100) NOT NULL,
 
     FOREIGN KEY (AfspraakID)
         REFERENCES Afspraken(AfspraakID),
@@ -93,8 +91,8 @@ GO
 
 CREATE TABLE Operaties (
     AfspraakID INT PRIMARY KEY,
-    OperatieType VARCHAR(100) NOT NULL,
-    Duur INT,
+    Beschrijving VARCHAR(100) NOT NULL,
+    
 
     FOREIGN KEY (AfspraakID)
         REFERENCES Afspraken(AfspraakID)
