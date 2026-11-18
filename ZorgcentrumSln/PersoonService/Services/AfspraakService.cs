@@ -7,52 +7,39 @@ using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.ApplicationServicesProject.Services {
     public class AfspraakService {
-        private IConsultatieRepository _consultatieRepository;
-        private IOperatieRepository _operatieRepository;
-        private IControleRepository _controleRepository;
+        private IAfspraakRepository _afspraakRepository;
+        
 
-        public AfspraakService(IConsultatieRepository consultatieRepo, IOperatieRepository operatieRepo, IControleRepository controleRepo) {
-            _consultatieRepository = consultatieRepo;
-            _operatieRepository = operatieRepo;
-            _controleRepository = controleRepo;
+        public AfspraakService(IAfspraakRepository afspraakRepository) {
+            _afspraakRepository = afspraakRepository;
         }
         public IReadOnlyCollection<AfspraakDto> GeefBeschikbareAfsprakenc() {
-            IEnumerable<Consultatie> consultaties = _consultatieRepository.GetAll();
-            IEnumerable<Operatie> operaties = _operatieRepository.GetAll();
-            IEnumerable<Controle> controles = _controleRepository.GetAll();
+            IEnumerable<Afspraak> afspraken = _afspraakRepository.GetAll();
 
             List<AfspraakDto> afspraakDtos = new();
 
-            foreach (Afspraak a in consultaties) {
-                afspraakDtos.Add(AfspraakDtoFactory.CreateAfspraakDto(a));
-            }
-
-            foreach (Afspraak a in operaties) {
-                afspraakDtos.Add(AfspraakDtoFactory.CreateAfspraakDto(a));
-            }
-
-            foreach (Afspraak a in controles) {
+            foreach (Afspraak a in afspraken) {
                 afspraakDtos.Add(AfspraakDtoFactory.CreateAfspraakDto(a));
             }
 
             return afspraakDtos;
         }
-        public Result VerwijderConsultatie(AfspraakId id) {
-            if (!_consultatieRepository.Delete(id)) {
+        public Result VerwijderAfspraak(AfspraakId id) {
+            if (!_afspraakRepository.Delete(id)) {
                 return Result.Failure(Error.Create("Afspraak id werd niet terug gevonden."));
             }
 
             return Result.Succes();
         }
 
-        public Result<AfspraakDto> VoegConsultatieToe(Afspraak newAfspraak) {
-            bool result = _consultatieRepository.Insert(newAfspraak);
+        public Result<AfspraakDto> VoegAfspraakToe(Afspraak newAfspraak) {
+            bool result = _afspraakRepository.Insert(newAfspraak);
 
             if (!result) {
-                return Result<ConsultatieDto>.Failure(Error.Create("De insert kon niet worden uitgevoerd"));
+                return Result<AfspraakDto>.Failure(Error.Create("De insert kon niet worden uitgevoerd"));
             }
 
-            return Result<ConsultatieDto>.Succes(AfspraakDtoFactory.CreateAfspraakDto(newAfspraak));
+            return Result<AfspraakDto>.Succes(AfspraakDtoFactory.CreateAfspraakDto(newAfspraak));
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ZorgcentrumSln.BL.Afspraken;
-using ZorgcentrumSln.BL.Personen;
 using ZorgcentrumSln.Buildingblocks.Results;
 
 using ZorgcentrumSln.Buildingblocks.ValueObjects;
@@ -16,8 +15,8 @@ public class Afdeling {
 
     public AfdelingId Id { get; }
     public string Naam { get; }
-    public string Code { get; init; }
-    public string Specialiteit { get; init; }
+    public string Code { get; }
+    public string Specialiteit { get; }
 
     public static Result<Afdeling> Create(AfdelingId id,string naam,string code, string specialiteit) {
         List<Error> errors = new();
@@ -50,7 +49,7 @@ public class Afdeling {
     public IReadOnlyCollection<RijksRegisterNr> IngeschrevenPatienten => _ingeschrevenPatienten.AsReadOnly();
     public Result RegistreerPatient(RijksRegisterNr rrn) {
         if (IngeschrevenPatienten.Contains(rrn)) {
-            return Result.Failure(Error.Create("Arts is al ingeschreven."));
+            return Result.Failure(Error.Create("Patient is al ingeschreven."));
         }
         _ingeschrevenPatienten.Add(rrn);
         return Result.Succes();
@@ -70,10 +69,10 @@ public class Afdeling {
     public IReadOnlyCollection<Afspraak> Afspraken => _afspraken.AsReadOnly();
     public Result VoegAfspraakToe(Afspraak afspraak) {
         List<Error> errors = new();
-        if (!IngeschrevenArtsen.Contains(afspraak.Arts.RizivNr)) {
+        if (!IngeschrevenArtsen.Contains(afspraak.ArtsID)) {
             errors.Add(new Error("De arts verbonden met deze afspraak is niet ingeschreven op deze afdeling."));
         }
-        if (!IngeschrevenPatienten.Contains(afspraak.Patient.Rrn)) {
+        if (!IngeschrevenPatienten.Contains(afspraak.PatientID)) {
             errors.Add(new Error("De patient verbonden met deze afspraak is niet ingeschreven op deze afdeling."));
         }
         if (Afspraken.Any(a =>

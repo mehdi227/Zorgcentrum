@@ -4,6 +4,8 @@
   </Folder>
   <Folder Name="/01 Presentatie/">
     <Project Path="ConsoleApp/ConsoleApp.csproj" Id="88646499-ba57-4b63-b395-04938b2ea164" />
+    <Project Path="ZorgcentrumSln.Presentatie.Desktop/ZorgcentrumSln.Presentatie.Desktop.csproj" Id="52169d42-394f-48c8-abeb-938cd8f56e1d" />
+    <Project Path="ZorgcentrumSln.Presentatie.ImportApp/ZorgcentrumSln.Presentatie.ImportApp.csproj" Id="092ead69-4286-4408-9a4e-a6a0939272b2" />
   </Folder>
   <Folder Name="/02 Application Services/">
     <Project Path="PersoonService/ZorgcentrumSln.ApplicationServicesProject.csproj" Id="817bc18f-e6e8-4cd7-9dc2-efc70195e32b" />

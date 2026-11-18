@@ -18,9 +18,9 @@ public abstract class Afspraak {
 
     public int DuurMin { get; }
 
-    public PersoonId PatientID { get; }
+    public RijksRegisterNr PatientID { get; }
 
-    public PersoonId ArtsID { get; }
+    public RizivNr ArtsID { get; }
 
     public AfdelingId AfdelingID { get; }
 
