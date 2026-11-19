@@ -12,32 +12,32 @@ public class AfspraakRepository : IAfspraakRepository {
             new DateTime(),
             30,
             AfdelingId.CreateUnique(),
-            PersoonId.CreateUnique(),
-            PersoonId.CreateUnique()
+            RijksRegisterNr.Create(),
+            RizivNr.Create()
             ).Value!,
         Controle.Create(
             AfspraakId.CreateUnique(),
             new DateTime(2024, 7, 18, 14, 32, 45),
             10,
             AfdelingId.CreateUnique(),
-            PersoonId.CreateUnique(),
-            PersoonId.CreateUnique(),
+            RijksRegisterNr.Create(),
+            RizivNr.Create(),
             AfspraakId.CreateUnique()).Value!,
         Controle.Create(
             AfspraakId.CreateUnique(),
             new DateTime(2024, 8, 5, 9, 15, 30),
             15,
             AfdelingId.CreateUnique(),
-            PersoonId.CreateUnique(),
-            PersoonId.CreateUnique(),
+            RijksRegisterNr.Create(),
+            RizivNr.Create(),
             AfspraakId.CreateUnique()).Value!,
         Operatie.Create(
             AfspraakId.CreateUnique(),
             new DateTime (2019, 8, 5, 9, 15, 30),
             30,
             AfdelingId.CreateUnique(),
-            PersoonId.CreateUnique(),
-            PersoonId.CreateUnique(),
+            RijksRegisterNr.Create(),
+            RizivNr.Create(),
             "hart operatie"
             ).Value!
     };

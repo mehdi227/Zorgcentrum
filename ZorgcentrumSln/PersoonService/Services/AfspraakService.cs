@@ -13,7 +13,7 @@ namespace ZorgcentrumSln.ApplicationServicesProject.Services {
         public AfspraakService(IAfspraakRepository afspraakRepository) {
             _afspraakRepository = afspraakRepository;
         }
-        public IReadOnlyCollection<AfspraakDto> GeefBeschikbareAfsprakenc() {
+        public IReadOnlyCollection<AfspraakDto> GeefBeschikbareAfspraken() {
             IEnumerable<Afspraak> afspraken = _afspraakRepository.GetAll();
 
             List<AfspraakDto> afspraakDtos = new();

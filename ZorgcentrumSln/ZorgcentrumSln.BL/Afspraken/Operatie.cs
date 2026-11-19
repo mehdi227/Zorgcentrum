@@ -6,15 +6,15 @@ namespace ZorgcentrumSln.BL.Afspraken;
 public class Operatie : Afspraak {
     public string Beschrijving { get; }
 
-    public Operatie(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, PersoonId patientId, PersoonId artsId, string beschrijving)
-        : base(id, datumTijdStart, duurMin, afdelingId, patientId, artsId) {
+    public Operatie(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, RijksRegisterNr patientRrn, RizivNr artsRizivNr, string beschrijving)
+        : base(id, datumTijdStart, duurMin, afdelingId, patientRrn, artsRizivNr) {
         Beschrijving = beschrijving;
     }
 
-    public static Result<Operatie> Create(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, PersoonId patientId, PersoonId artsId, string beschrijving) {
+    public static Result<Operatie> Create(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, RijksRegisterNr patientRrn, RizivNr artsRizivNr, string beschrijving) {
         List<Error> errors = new();
 
-        var createcommons = CreateCommons(id, datumTijdStart, duurMin, patientId, artsId, afdelingId);
+        var createcommons = CreateCommons(id, datumTijdStart, duurMin, patientRrn, artsRizivNr, afdelingId);
         if (createcommons.IsFailure) {
             errors.AddRange(createcommons.Errors);
         }
@@ -31,6 +31,6 @@ public class Operatie : Afspraak {
             return Result<Operatie>.Failure(errors);
         }
 
-        return Result<Operatie>.Succes(new Operatie(id, datumTijdStart, duurMin, afdelingId, patientId, artsId, beschrijving));
+        return Result<Operatie>.Succes(new Operatie(id, datumTijdStart, duurMin, afdelingId, patientRrn, artsRizivNr, beschrijving));
     }
 }

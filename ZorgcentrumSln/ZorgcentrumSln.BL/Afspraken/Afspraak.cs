@@ -24,8 +24,8 @@ public abstract class Afspraak {
 
     public AfdelingId AfdelingID { get; }
 
-    public static Result<(AfspraakId AfspraakID, DateTime DatumTijdStart, int DuurMin, PersoonId PatientID, PersoonId ArtsID, AfdelingId AfdelingID)> CreateCommons(
-        AfspraakId afspraakId, DateTime datumTijdStart, int duurMin, PersoonId patientId, PersoonId artsId, AfdelingId afdelingId) {
+    public static Result<(AfspraakId AfspraakID, DateTime DatumTijdStart, int DuurMin, RijksRegisterNr PatientRrn, RizivNr ArtsRizivNr, AfdelingId AfdelingID)> CreateCommons(
+        AfspraakId afspraakId, DateTime datumTijdStart, int duurMin, RijksRegisterNr patientRrn, RizivNr artsRizivNr, AfdelingId afdelingId) {
 
         List<Error> errors = new();
 
@@ -34,12 +34,12 @@ public abstract class Afspraak {
             errors.AddRange(createAfspraakId.Errors);
         }
 
-        var createPatientId = PersoonId.Create(patientId.Value);
+        var createPatientId = RijksRegisterNr.Create(patientRrn.Value);
         if (createPatientId.IsFailure) {
             errors.AddRange(createPatientId.Errors);
         }
 
-        var createArtsId = PersoonId.Create(artsId.Value);
+        var createArtsId = RizivNr.Create(artsRizivNr.Value);
         if (createArtsId.IsFailure) {
             errors.AddRange(createArtsId.Errors);
         }
@@ -50,9 +50,9 @@ public abstract class Afspraak {
         }
 
         if (errors.Any()) {
-            return Result<(AfspraakId AfspraakID, DateTime DatumTijdStart, int DuurMin, PersoonId PatientID, PersoonId ArtsID, AfdelingId AfdelingID)>.Failure(errors);
+            return Result<(AfspraakId AfspraakID, DateTime DatumTijdStart, int DuurMin, RijksRegisterNr PatientRrn, RizivNr ArtsRizivNr, AfdelingId AfdelingID)>.Failure(errors);
         }
-        return Result<(AfspraakId AfspraakID, DateTime DatumTijdStart, int DuurMin, PersoonId PatientID, PersoonId ArtsID, AfdelingId AfdelingID)>.Succes((afspraakId, datumTijdStart, duurMin, patientId, artsId, afdelingId));
+        return Result<(AfspraakId AfspraakID, DateTime DatumTijdStart, int DuurMin, RijksRegisterNr PatientRrn, RizivNr ArtsRizivNr, AfdelingId AfdelingID)>.Succes((afspraakId, datumTijdStart, duurMin, patientRrn, artsRizivNr, afdelingId));
     }
 
     public override bool Equals(object? obj) {

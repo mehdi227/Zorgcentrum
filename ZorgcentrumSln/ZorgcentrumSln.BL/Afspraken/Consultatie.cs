@@ -3,14 +3,14 @@ using ZorgcentrumSln.Buildingblocks.ValueObjects;
 
 namespace ZorgcentrumSln.BL.Afspraken {
     public class Consultatie : Afspraak {
-        public Consultatie(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, PersoonId patientId, PersoonId artsId)
-            : base(id, datumTijdStart, duurMin, afdelingId, patientId, artsId) {
+        public Consultatie(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, RijksRegisterNr patientRrn, RizivNr artsRizivNr)
+            : base(id, datumTijdStart, duurMin, afdelingId, patientRrn, artsRizivNr) {
 
         }
-        public static Result<Consultatie> Create(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, PersoonId patientId, PersoonId artsId) {
+        public static Result<Consultatie> Create(AfspraakId id, DateTime datumTijdStart, int duurMin, AfdelingId afdelingId, RijksRegisterNr patientRrn, RizivNr artsRizivNr) {
             List<Error> errors = new();
 
-            var createcommons = CreateCommons(id, datumTijdStart, duurMin, patientId, artsId, afdelingId);
+            var createcommons = CreateCommons(id, datumTijdStart, duurMin, patientRrn, artsRizivNr, afdelingId);
             if (createcommons.IsFailure) {
                 errors.AddRange(createcommons.Errors);
             }
@@ -22,7 +22,7 @@ namespace ZorgcentrumSln.BL.Afspraken {
             if (errors.Any()) {
                 return Result<Consultatie>.Failure(errors);
             }
-            return Result<Consultatie>.Succes(new Consultatie(id, datumTijdStart, duurMin, afdelingId, patientId, artsId));
+            return Result<Consultatie>.Succes(new Consultatie(id, datumTijdStart, duurMin, afdelingId, patientRrn, artsRizivNr));
         }
     }
 }
